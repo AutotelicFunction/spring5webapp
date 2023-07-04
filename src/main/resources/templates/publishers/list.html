@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Publisher Table</title>
+</head>
+<body>
+<h1>Table of Publishers</h1>
+
+<table>
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Address line 1</td>
+        <td>City</td>
+        <td>State</td>
+        <td>ZIP</td>
+        <td>Published books</td>
+        <td>Publishing authors</td>
+    </tr>
+    <tr th:each="publisher : ${publishers}">
+        <td th:text="${publisher.id}">None</td>
+        <td th:text="${publisher.name}">None</td>
+        <td th:text="${publisher.addressLine1}">None</td>
+        <td th:text="${publisher.city}">None</td>
+        <td th:text="${publisher.state}">None</td>
+        <td th:text="${publisher.zip}">None</td>
+        <td>
+            <table>
+                <tr th:each="book : ${publisher.publishedBooks}">
+                    <td th:text="${book.title}">None</td>
+                    <td th:text="${book.isbn}">None</td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr th:each="author : ${publisher.publishingAuthors}">
+                    <td th:text="${author.firstName}">None</td>
+                    <td th:text="${author.lastName}">None</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

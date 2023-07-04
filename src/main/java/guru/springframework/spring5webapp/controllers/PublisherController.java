@@ -14,10 +14,10 @@ public class PublisherController {
         this.publisherRepository = publisherRepository;
     }
 
-    @RequestMapping("/Publisher")
+    @RequestMapping("/publishers")
     public String getPublishers(Model model){
-        model .addAttribute(publisherRepository.findAll());
+        model.addAttribute("publishers",publisherRepository.findAll());
 
-        return "publishers";
+        return "publishers/list";
     }
 }
