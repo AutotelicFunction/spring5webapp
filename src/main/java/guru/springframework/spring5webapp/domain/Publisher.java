@@ -18,6 +18,14 @@ public class Publisher {
     private String state;
     private String zip;
 
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> publishedBooks = new HashSet<>();
+
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    private Set<Author> publishingAuthors = new HashSet<>();
+
     public Publisher() {
     }
 
@@ -27,6 +35,23 @@ public class Publisher {
         this.city = city;
         this.state = state;
         this.zip = zip;
+    }
+
+
+    public Set<Book> getPublishedBooks() {
+        return publishedBooks;
+    }
+
+    public void setPublishedBooks(Set<Book> publishedBooks) {
+        this.publishedBooks = publishedBooks;
+    }
+
+    public Set<Author> getPublishingAuthors() {
+        return publishingAuthors;
+    }
+
+    public void setPublishingAuthors(Set<Author> publishingAuthors) {
+        this.publishingAuthors = publishingAuthors;
     }
 
     public Long getId() {

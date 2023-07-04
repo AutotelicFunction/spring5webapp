@@ -41,6 +41,7 @@ public class BootStrapData implements CommandLineRunner {
         rod.getBooks().add(noEJB);
         noEJB.getAuthors().add(rod);
 
+
         authorRepository.save(rod);
         bookRepository.save(noEJB);
 
@@ -48,10 +49,36 @@ public class BootStrapData implements CommandLineRunner {
         System.out.println("Number of Books: " + bookRepository.count());
 
         Publisher springer = new Publisher("Springer", "Tiergartenstrasse 17", "Heidelberg","Baden-Württemberg", "D-69121");
+        publisherRepository.save(springer);
+        System.out.println("Number of Publisher: " + publisherRepository.count());
 
+        noEJB.setPublisher(springer);
+        myBook.setPublisher(springer);
+
+        springer.getPublishedBooks().add(myBook);
+        springer.getPublishedBooks().add(noEJB);
+
+        bookRepository.save(noEJB);
+        bookRepository.save(myBook);
         publisherRepository.save(springer);
 
-        System.out.println("Number of Publisher: " + publisherRepository.count());
+        System.out.println("Added Publisher to Books");
+        System.out.println("Number of Books Published: " + springer.getPublishedBooks().size());
+
+        eric.setPublisher(springer);
+        rod.setPublisher(springer);
+
+        springer.getPublishingAuthors().add(eric);
+        springer.getPublishingAuthors().add(rod);
+
+        authorRepository.save(rod);
+        authorRepository.save(eric);
+        publisherRepository.save(springer);
+
+        System.out.println("Added Publisher to Authors.");
+        System.out.println("Number of Authors Publishing: " + springer.getPublishingAuthors().size());
+
+        System.out.println("Finished Bootstrap");
 
     }
 }
